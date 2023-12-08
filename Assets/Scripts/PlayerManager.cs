@@ -8,6 +8,21 @@ public class PlayerManager : Singleton<PlayerManager>
     public float speed;
     private Vector2 move;
     [SerializeField] CharacterController characterController;
+    [SerializeField] Transform hands;
+
+    public GameObject ObjectInHands
+    {
+        get { return ObjectInHands; }
+        set
+        {
+            ObjectInHands = value;
+            if(value != null)
+            {
+                value.transform.SetParent(hands);
+                value.transform.localPosition = Vector3.zero;
+            }
+        }
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
