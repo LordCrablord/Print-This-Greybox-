@@ -22,10 +22,10 @@ public class Storage : MonoBehaviour
     protected void GiveItem()
     {
         var playerManager = playerCollider.GetComponent<PlayerManager>();
-        if (playerManager.ObjectInHands == null)
+        if (!playerManager.HasObjectInHands())
         {
             GameObject ourObject = Instantiate(objectPrefab, transform.position, objectPrefab.transform.rotation);
-            playerManager.ObjectInHands = ourObject;
+            playerManager.SetObjectToHands(ourObject);
         }
     }
 

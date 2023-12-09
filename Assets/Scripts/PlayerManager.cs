@@ -10,20 +10,19 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField] CharacterController characterController;
     [SerializeField] Transform hands;
 
-    GameObject objectInHands;
-    public GameObject ObjectInHands
+    public GameObject objectInHands;
+    
+    public void SetObjectToHands(GameObject obj)
     {
-        get { return objectInHands; }
-        set
+        objectInHands = obj;
+        if(objectInHands != null)
         {
-            objectInHands = value;
-            if(value != null)
-            {
-                value.transform.SetParent(hands);
-                value.transform.localPosition = Vector3.zero;
-            }
+            objectInHands.transform.SetParent(hands);
+            objectInHands.transform.localPosition = Vector3.zero;
         }
     }
+
+    public bool HasObjectInHands() => objectInHands == null ? false : true;
 
     public void OnMove(InputAction.CallbackContext context)
     {
