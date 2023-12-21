@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class ItemDB : MonoBehaviour
+public class ItemDB : Singleton<ItemDB>
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<Item> gameItemsList;
+    public List<GameObject> gamePrefabsList;
+
+    public GameObject GetItemPrefab(int id)
     {
-        
+        if (gamePrefabsList[id] != null)
+            return gamePrefabsList[id];
+        else
+        {
+            Debug.LogError("no item with such id");
+            return null;
+        }  
     }
 
-    // Update is called once per frame
-    void Update()
+    public Item GetItem(int id)
     {
-        
+        return gameItemsList.Find(x => x.id == id);
     }
 }

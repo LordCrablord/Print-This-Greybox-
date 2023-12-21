@@ -43,8 +43,16 @@ public class Pedestal : MonoBehaviour
                 putItem.transform.SetParent(center);
                 putItem.transform.localPosition = Vector3.zero;
                 playerManager.SetObjectToHands(temp);
+
+                OnObjectPut();
             }
         }
+    }
+
+    public void DestroyItemOnPedestal()
+    {
+        Destroy(putItem);
+        putItem = null;
     }
 
     bool CheckIfCorrectItem(int itemId)

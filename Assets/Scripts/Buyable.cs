@@ -2,36 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Storage : MonoBehaviour
+public class Buyable : MonoBehaviour
 {
-    [SerializeField] protected GameObject objectPrefab;
+    [SerializeField] GameObject activeObject;
+    [SerializeField] GameObject inactiveObject;
+    public int priceToBuy = 0;
     protected bool isPlayerNear = false;
     protected Collider playerCollider;
-    public string instrumentName;
-    public int priceOfUsage;
+
     protected virtual void Update()
     {
         if (isPlayerNear)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                GiveItem();
+                TryToBuy();
             }
         }
     }
 
-    protected void GiveItem()
+    void TryToBuy()
     {
-        var playerManager = playerCollider.GetComponent<PlayerManager>();
-        if (!playerManager.HasObjectInHands())
-        {
-            GameObject ourObject = Instantiate(objectPrefab, transform.position, objectPrefab.transform.rotation);
-            playerManager.SetObjectToHands(ourObject);
-        }
-
-        //TODO Later to check for money
-        if (GameManager.Instance.Gold >= priceOfUsage)
-            GameManager.Instance.Gold -= priceOfUsage;
+        activeObject.SetActive(true);
+        inactiveObject.SetActive(false);
+        if(GameManager.Instance.Gold>=priceToBuy)
+            GameManager.Instance.Gold -= priceToBuy;
     }
 
     void SetUITip(bool visible)
