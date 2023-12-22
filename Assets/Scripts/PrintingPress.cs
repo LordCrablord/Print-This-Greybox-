@@ -18,7 +18,6 @@ public class PrintingPress : MonoBehaviour
 
     void CheckForItemCreation()
     {
-        Debug.Log("fuck");
         foreach (var pedestal in pedestals)
         {
             var placement = pedestal.putItem;

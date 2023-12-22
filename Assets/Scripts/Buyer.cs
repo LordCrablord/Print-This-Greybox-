@@ -7,6 +7,7 @@ using System;
 public class Buyer : MonoBehaviour
 {
     public float timeToCompleteTask;
+    public int taskGoldReward;
     [SerializeField] TextMeshProUGUI timerToMakeBookTMP;
     [SerializeField] Transform orderPos;
     GameObject reqObject;
@@ -36,5 +37,27 @@ public class Buyer : MonoBehaviour
         reqObject = objToCreate;
 
         objToCreate.GetComponent<Item>().SetInactive();
+    }
+
+    public void CheckIfCorrectObject(PlayerManager playerManager)
+    {
+        if (playerManager.HasObjectInHands() == false) return;
+
+        var checkingObjScript = playerManager.objectInHands.GetComponent<Item>();
+        var reqObjectScript = reqObject.GetComponent<Item>();
+
+        if(checkingObjScript.id == reqObjectScript.id)
+        {
+            playerManager.SetObjectToHands(null);
+            Destroy(checkingObjScript.gameObject);
+            TaskComplete();
+        }
+
+    }
+
+    void TaskComplete()
+    {
+        GameManager.Instance.Gold += taskGoldReward;
+        Destroy(gameObject);
     }
 }
