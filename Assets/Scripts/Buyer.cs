@@ -8,6 +8,8 @@ public class Buyer : MonoBehaviour
 {
     public float timeToCompleteTask;
     [SerializeField] TextMeshProUGUI timerToMakeBookTMP;
+    [SerializeField] Transform orderPos;
+    GameObject reqObject;
 
     private void Update()
     {
@@ -25,5 +27,14 @@ public class Buyer : MonoBehaviour
     void TimeRanOut()
     {
         Destroy(gameObject);
+    }
+
+    public void SetBuyerTask(GameObject objToCreate)
+    {
+        objToCreate.transform.SetParent(orderPos);
+        objToCreate.transform.localPosition = Vector3.zero;
+        reqObject = objToCreate;
+
+        objToCreate.GetComponent<Item>().SetInactive();
     }
 }

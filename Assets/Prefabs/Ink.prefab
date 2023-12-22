@@ -112,4 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   itemName: Black Ink
-  reqItemsToCreate: []
+  reqItemIdToCreate: 
+  activeMaterial: {fileID: 2100000, guid: e318007ef8a2d5946ab16c3de80c864e, type: 2}
+  inactiveMaterial: {fileID: 2100000, guid: 29aaad25d8634614e926449b72bc78e2, type: 2}

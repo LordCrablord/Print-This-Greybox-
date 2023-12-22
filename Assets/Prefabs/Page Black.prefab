@@ -113,3 +113,5 @@ MonoBehaviour:
   id: 3
   itemName: Page Black
   reqItemIdToCreate: 0100000002000000
+  activeMaterial: {fileID: 2100000, guid: e318007ef8a2d5946ab16c3de80c864e, type: 2}
+  inactiveMaterial: {fileID: 2100000, guid: 29aaad25d8634614e926449b72bc78e2, type: 2}

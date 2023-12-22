@@ -523,9 +523,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buyerPrefab: {fileID: 929228576925239462, guid: 05e174b332200bc4f98100b38d196b7f, type: 3}
   spawnRadius: 5
-  spawnRatio: 3
+  spawnRatio: 14
+  spawnRatioRandomise: 3
   minDistanceBetweenBuyers: 3
-  timeToMakeBooks: 5
+  timeToMakeBooks: 20
+  bookTimeRandomise: 4
+  startGameOrdersList:
+  - {fileID: 3370397431327085594, guid: 6e23f701ff2a64e44899c04a2b714249, type: 3}
+  lateGameOrdersList: []
+  lateGameTimer: 25
 --- !u!4 &114532001
 Transform:
   m_ObjectHideFlags: 0

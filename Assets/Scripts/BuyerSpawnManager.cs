@@ -7,14 +7,30 @@ public class BuyerSpawnManager : MonoBehaviour
     [SerializeField] GameObject buyerPrefab;
     [SerializeField] float spawnRadius;
     [SerializeField] float spawnRatio;
+    [SerializeField] float spawnRatioRandomise;
     [SerializeField] float minDistanceBetweenBuyers;
     [SerializeField] float timeToMakeBooks;
+    [SerializeField] float bookTimeRandomise;
+
+    [SerializeField] List<GameObject> startGameOrdersList;
+    [SerializeField] List<GameObject> lateGameOrdersList;
+    [SerializeField] float lateGameTimer;
+
+    List<GameObject> orderslist;
 
     float timeBeforeSpawnLeft;
 
     private void Start()
     {
-        timeBeforeSpawnLeft = spawnRatio;
+        timeBeforeSpawnLeft = 3f;
+        orderslist = new List<GameObject>();
+        SetOrderList(startGameOrdersList);
+    }
+
+    void SetOrderList(List<GameObject> additions)
+    {
+        foreach (var newObj in additions)
+            orderslist.Add(newObj);
     }
 
     private void Update()
@@ -23,8 +39,25 @@ public class BuyerSpawnManager : MonoBehaviour
         if (timeBeforeSpawnLeft <= 0)
         {
             SpawnBuyer();
-            timeBeforeSpawnLeft = spawnRatio;
+            timeBeforeSpawnLeft = FigureSpawnime();
         }
+
+        ManageLateGameTimer();
+    }
+
+    void ManageLateGameTimer()
+    {
+        lateGameTimer -= Time.deltaTime;
+        if (lateGameTimer <= 0)
+        {
+            SetOrderList(lateGameOrdersList);
+        }
+    }
+
+    float FigureSpawnime()
+    {
+        var ourRatio = spawnRatio + Random.Range(-spawnRatioRandomise, spawnRatioRandomise);
+        return ourRatio;
     }
 
     void SpawnBuyer()
@@ -34,6 +67,7 @@ public class BuyerSpawnManager : MonoBehaviour
         buyer.transform.position = pos;
         var buyerScript = buyer.GetComponent<Buyer>();
         SetBuyerTime(buyerScript);
+        SetBuyerObject(buyerScript);
     }
 
     Vector3 ChoosePosition(int tryCount)
@@ -55,7 +89,15 @@ public class BuyerSpawnManager : MonoBehaviour
 
     void SetBuyerTime(Buyer buyerScript)
     {
-        buyerScript.timeToCompleteTask = timeToMakeBooks;
+        var buyerTime = timeToMakeBooks + Random.Range(-bookTimeRandomise, bookTimeRandomise);
+        buyerScript.timeToCompleteTask = buyerTime;
+    }
+
+    void SetBuyerObject(Buyer buyerScript)
+    {
+        var index = Random.Range(0, orderslist.Count);
+        var objToCreate = Instantiate(orderslist[index]);
+        buyerScript.SetBuyerTask(objToCreate);
     }
 
 }

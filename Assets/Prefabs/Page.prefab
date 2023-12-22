@@ -112,4 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   itemName: Page
-  reqItemsToCreate: []
+  reqItemIdToCreate: 
+  activeMaterial: {fileID: 0}
+  inactiveMaterial: {fileID: 2100000, guid: 5c872910c5bc8054587ebfc436edd679, type: 2}
