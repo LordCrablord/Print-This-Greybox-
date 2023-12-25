@@ -9,6 +9,7 @@ public class Buyer : MonoBehaviour
     public float timeToCompleteTask;
     public int taskGoldReward;
     [SerializeField] TextMeshProUGUI timerToMakeBookTMP;
+    [SerializeField] TextMeshProUGUI goldTMP;
     [SerializeField] Transform orderPos;
     GameObject reqObject;
 
@@ -64,5 +65,10 @@ public class Buyer : MonoBehaviour
     public void IncreaseTimeLeft(float time)
     {
         timeToCompleteTask += time;
+    }
+
+    public void SetGoldUI(int value)
+    {
+        goldTMP.text = value.ToString();
     }
 }

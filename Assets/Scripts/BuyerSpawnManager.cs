@@ -11,6 +11,9 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
     [SerializeField] float minDistanceBetweenBuyers;
     [SerializeField] float timeToMakeBooks;
     [SerializeField] float bookTimeRandomise;
+    [SerializeField] float goldReward;
+    [SerializeField] float goldRandomise;
+    [SerializeField] float lateGoldRewardIncrease;
 
     [SerializeField] List<GameObject> startGameOrdersList;
     [SerializeField] List<GameObject> lateGameOrdersList;
@@ -68,6 +71,7 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
         var buyerScript = buyer.GetComponent<Buyer>();
         SetBuyerTime(buyerScript);
         SetBuyerObject(buyerScript);
+        SetBuyerGoldReward(buyerScript);
     }
 
     Vector3 ChoosePosition(int tryCount)
@@ -98,6 +102,13 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
         var index = Random.Range(0, orderslist.Count);
         var objToCreate = Instantiate(orderslist[index]);
         buyerScript.SetBuyerTask(objToCreate);
+    }
+
+    void SetBuyerGoldReward(Buyer buyerScript)
+    {
+        var gold = (int)(goldReward + Random.Range(-goldRandomise, goldRandomise));
+        buyerScript.taskGoldReward = gold;
+        buyerScript.SetGoldUI(gold);
     }
 
     public void IncreaseTimeOfTasks(float time)

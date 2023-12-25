@@ -762,9 +762,18 @@ MonoBehaviour:
   minDistanceBetweenBuyers: 3
   timeToMakeBooks: 20
   bookTimeRandomise: 4
+  goldReward: 10
+  goldRandomise: 3
+  lateGoldRewardIncrease: 8
   startGameOrdersList:
   - {fileID: 3370397431327085594, guid: 6e23f701ff2a64e44899c04a2b714249, type: 3}
-  lateGameOrdersList: []
+  lateGameOrdersList:
+  - {fileID: 1032346690328953234, guid: 26d167bb941afad4d88f74c6b711c50c, type: 3}
+  - {fileID: 3467345002069701691, guid: 4ed1b1c4e2df57d4d826ac7fa7492f5d, type: 3}
+  - {fileID: 4658915346574592262, guid: a592d2e766933ce4fa5931c3bc434e98, type: 3}
+  - {fileID: 9160416543110506239, guid: 59d13b187875b154380d18e56c48fab1, type: 3}
+  - {fileID: 2287346361647877308, guid: 831073d5baf2f8e4699d2e0972f8f937, type: 3}
+  - {fileID: 1564950734877909130, guid: 6d2e6efb8d92c4d488a5a1edea1ae55b, type: 3}
   lateGameTimer: 25
 --- !u!4 &114532001
 Transform:
@@ -6317,6 +6326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 933939225}
+  - component: {fileID: 933939226}
   m_Layer: 0
   m_Name: Active
   m_TagString: Untagged
@@ -6342,6 +6352,21 @@ Transform:
   m_Father: {fileID: 1052312309}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &933939226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933939224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490303cffa794974997103ce4a5b0ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  printingProductsId: 07000000
+  pedestals:
+  - {fileID: 226804062}
 --- !u!1 &945465448
 GameObject:
   m_ObjectHideFlags: 0
