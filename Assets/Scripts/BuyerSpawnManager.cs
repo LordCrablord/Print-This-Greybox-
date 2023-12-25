@@ -17,7 +17,9 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
 
     [SerializeField] List<GameObject> startGameOrdersList;
     [SerializeField] List<GameObject> lateGameOrdersList;
+    [SerializeField] List<GameObject> midGameOrdersList;
     [SerializeField] float lateGameTimer;
+    [SerializeField] float midGameTimer;
 
     List<GameObject> orderslist;
 
@@ -45,11 +47,15 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
             timeBeforeSpawnLeft = FigureSpawnime();
         }
 
-        ManageLateGameTimer();
+        ManageGameTimers();
     }
 
-    void ManageLateGameTimer()
+    void ManageGameTimers()
     {
+        midGameTimer -= Time.deltaTime;
+        if (midGameTimer <= 0)
+            SetOrderList(midGameOrdersList);
+
         lateGameTimer -= Time.deltaTime;
         if (lateGameTimer <= 0)
         {
