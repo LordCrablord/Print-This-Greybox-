@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyerSpawnManager : MonoBehaviour
+public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
 {
     [SerializeField] GameObject buyerPrefab;
     [SerializeField] float spawnRadius;
@@ -100,4 +100,13 @@ public class BuyerSpawnManager : MonoBehaviour
         buyerScript.SetBuyerTask(objToCreate);
     }
 
+    public void IncreaseTimeOfTasks(float time)
+    {
+        int index = transform.childCount;
+        for (int i = 0; i< index; i++)
+        {
+            var buyer = transform.GetChild(i).GetComponent<Buyer>();
+            buyer.IncreaseTimeLeft(time);
+        }
+    }
 }

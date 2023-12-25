@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] UIManager ui;
-    int gold = 15;
+    [SerializeField] int gold;
     public int Gold { 
         get { return gold; } 
         set { gold = value; ui.SetGold(Gold); } 

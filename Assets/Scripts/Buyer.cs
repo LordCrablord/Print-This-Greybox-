@@ -59,5 +59,10 @@ public class Buyer : MonoBehaviour
     {
         GameManager.Instance.Gold += taskGoldReward;
         Destroy(gameObject);
+    } 
+
+    public void IncreaseTimeLeft(float time)
+    {
+        timeToCompleteTask += time;
     }
 }
