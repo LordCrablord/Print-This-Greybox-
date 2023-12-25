@@ -37,5 +37,6 @@ public class UIManager : MonoBehaviour
     public void SetHelp()
     {
         helpUI.SetActive(!helpUI.activeInHierarchy);
+        Time.timeScale = helpUI.activeInHierarchy ? 0 : 1;
     }
 }
