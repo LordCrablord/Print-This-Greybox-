@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI livesTMP;
     [SerializeField] GameObject menuUI;
     [SerializeField] GameObject helpUI;
+    [SerializeField] GameObject victoryUI;
+    [SerializeField] GameObject defeatUI;
     public void SetGold(int newVal)
     {
         goldTMP.text = newVal.ToString();
@@ -38,5 +40,15 @@ public class UIManager : MonoBehaviour
     {
         helpUI.SetActive(!helpUI.activeInHierarchy);
         Time.timeScale = helpUI.activeInHierarchy ? 0 : 1;
+    }
+
+    public void SetVictoryUI()
+    {
+        victoryUI.SetActive(true);
+    }
+
+    public void SetDefeatUI()
+    {
+        defeatUI.SetActive(true);
     }
 }

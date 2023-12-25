@@ -7,11 +7,12 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] UIManager ui;
     [SerializeField] int gold;
+    [SerializeField] int goldToWin;
     [SerializeField] int lives;
     [SerializeField] int maxLives;
     public int Gold { 
         get { return gold; } 
-        set { gold = value; ui.SetGold(Gold); } 
+        set { gold = value; ui.SetGold(Gold); if (gold >= goldToWin) Victory(); } 
     }
 
     public int Lives
@@ -28,14 +29,18 @@ public class GameManager : Singleton<GameManager>
         ui.SetLives(Lives);
     }
 
-    private void Update()
-    {
-        
-    }
-
     void GameOver()
     {
+        Time.timeScale = 0;
+        SetMenu();
+        ui.SetDefeatUI();
+    }
 
+    void Victory()
+    {
+        Time.timeScale = 0;
+        SetMenu();
+        ui.SetVictoryUI();
     }
 
     public void QuitGame()
