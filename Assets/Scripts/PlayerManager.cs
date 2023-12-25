@@ -38,6 +38,7 @@ public class PlayerManager : Singleton<PlayerManager>
     void Update()
     {
         MovePlayer();
+        ManageInput();
     }
 
     void MovePlayer()
@@ -50,6 +51,18 @@ public class PlayerManager : Singleton<PlayerManager>
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.5f);
         }
         Gravity();
+    }
+
+    void ManageInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Instance.SetMenu();
+        }
+        else if (Input.GetKeyDown(KeyCode.H))
+        {
+            GameManager.Instance.SetUIHelp();
+        }
     }
 
     void Gravity()
