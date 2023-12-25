@@ -28,6 +28,7 @@ public class Buyer : MonoBehaviour
 
     void TimeRanOut()
     {
+        GameManager.Instance.Lives--;
         Destroy(gameObject);
     }
 
