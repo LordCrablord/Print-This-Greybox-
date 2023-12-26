@@ -14,6 +14,8 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
     [SerializeField] float goldReward;
     [SerializeField] float goldRandomise;
     [SerializeField] float lateGoldRewardIncrease;
+    [SerializeField] float midTimeTomakeBookIncrease;
+    [SerializeField] float lateTimeTomakeBookIncrease;
 
     [SerializeField] List<GameObject> startGameOrdersList;
     [SerializeField] List<GameObject> lateGameOrdersList;
@@ -24,6 +26,8 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
     List<GameObject> orderslist;
 
     float timeBeforeSpawnLeft;
+    bool midGameReached = false;
+    bool lateGameReached = false;
 
     private void Start()
     {
@@ -53,13 +57,21 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
     void ManageGameTimers()
     {
         midGameTimer -= Time.deltaTime;
-        if (midGameTimer <= 0)
+        if (midGameTimer <= 0 && !midGameReached)
+        {
             SetOrderList(midGameOrdersList);
+            timeToMakeBooks += midTimeTomakeBookIncrease;
+            midGameReached = true;
+        }
+            
 
         lateGameTimer -= Time.deltaTime;
-        if (lateGameTimer <= 0)
+        if (lateGameTimer <= 0 && !lateGameReached)
         {
             SetOrderList(lateGameOrdersList);
+            timeToMakeBooks += lateTimeTomakeBookIncrease;
+            goldReward += lateGoldRewardIncrease;
+            lateGameReached = true;
         }
     }
 
