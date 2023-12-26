@@ -62,4 +62,6 @@ public class GameManager : Singleton<GameManager>
     {
         ui.SetHelp();
     }
+
+    public UIManager GetUI() => ui;
 }

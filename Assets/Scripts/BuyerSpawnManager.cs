@@ -78,6 +78,7 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
         SetBuyerTime(buyerScript);
         SetBuyerObject(buyerScript);
         SetBuyerGoldReward(buyerScript);
+        SetBuyerHelpUI(buyerScript);
     }
 
     Vector3 ChoosePosition(int tryCount)
@@ -115,6 +116,12 @@ public class BuyerSpawnManager : Singleton<BuyerSpawnManager>
         var gold = (int)(goldReward + Random.Range(-goldRandomise, goldRandomise));
         buyerScript.taskGoldReward = gold;
         buyerScript.SetGoldUI(gold);
+    }
+
+    void SetBuyerHelpUI(Buyer buyerScript)
+    {
+        var helpUI = GameManager.Instance.GetUI().SetNewCreatehelp();
+        buyerScript.SetTaskHelpUI(helpUI);
     }
 
     public void IncreaseTimeOfTasks(float time)

@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject helpUI;
     [SerializeField] GameObject victoryUI;
     [SerializeField] GameObject defeatUI;
+    [SerializeField] GameObject helpCreateContainer;
+    [SerializeField] GameObject helpCreateUIPrefab;
     public void SetGold(int newVal)
     {
         goldTMP.text = newVal.ToString();
@@ -50,5 +52,11 @@ public class UIManager : MonoBehaviour
     public void SetDefeatUI()
     {
         defeatUI.SetActive(true);
+    }
+
+    public CreateHelpUI SetNewCreatehelp()
+    {
+        var helpCreate = Instantiate(helpCreateUIPrefab, helpCreateContainer.transform);
+        return helpCreate.GetComponent<CreateHelpUI>();
     }
 }

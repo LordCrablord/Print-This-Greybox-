@@ -12,13 +12,17 @@ public class Buyer : MonoBehaviour
     [SerializeField] TextMeshProUGUI goldTMP;
     [SerializeField] Transform orderPos;
     GameObject reqObject;
-
+    string reqObjName;
+    CreateHelpUI createHelpUI;
     private void Update()
     {
         timeToCompleteTask -= Time.deltaTime;
 
         float roundedNumber = (float)Math.Floor(timeToCompleteTask * 100) / 100;
         timerToMakeBookTMP.text = roundedNumber.ToString("F2");
+
+        createHelpUI.bookNameTMP.text = reqObjName;
+        createHelpUI.timeLeftTMP.text = roundedNumber.ToString("F2");
 
         if (timeToCompleteTask <= 0)
         {
@@ -30,6 +34,7 @@ public class Buyer : MonoBehaviour
     {
         GameManager.Instance.Lives--;
         Destroy(gameObject);
+        Destroy(createHelpUI.gameObject);
     }
 
     public void SetBuyerTask(GameObject objToCreate)
@@ -37,8 +42,14 @@ public class Buyer : MonoBehaviour
         objToCreate.transform.SetParent(orderPos);
         objToCreate.transform.localPosition = Vector3.zero;
         reqObject = objToCreate;
+        reqObjName = objToCreate.GetComponent<Item>().itemName;
 
         objToCreate.GetComponent<Item>().SetInactive();
+    }
+
+    public void SetTaskHelpUI(CreateHelpUI helpUI)
+    {
+        createHelpUI = helpUI;
     }
 
     public void CheckIfCorrectObject(PlayerManager playerManager)
@@ -61,6 +72,7 @@ public class Buyer : MonoBehaviour
     {
         GameManager.Instance.Gold += taskGoldReward;
         Destroy(gameObject);
+        Destroy(createHelpUI.gameObject);
     } 
 
     public void IncreaseTimeLeft(float time)
