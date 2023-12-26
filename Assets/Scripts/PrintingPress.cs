@@ -6,7 +6,7 @@ public class PrintingPress : MonoBehaviour
 {
     public List<int> printingProductsId;
     [SerializeField] List<Pedestal> pedestals;
-    //[SerializeField] Transform placeOfCreation;
+    [SerializeField] Pedestal resultPedestal;
 
     private void Start()
     {
@@ -23,6 +23,7 @@ public class PrintingPress : MonoBehaviour
             var placement = pedestal.putItem;
             if (placement == null) return;
         }
+        if (resultPedestal.putItem != null) return;
         
         //if all put
         foreach (int id in printingProductsId)
@@ -50,11 +51,18 @@ public class PrintingPress : MonoBehaviour
     {
         var itemPrefab = ItemDB.Instance.GetItemPrefab(id);
         var newItem = Instantiate(itemPrefab, transform);
-        PlayerManager.Instance.SetObjectToHands(newItem);
+        SetObjectToResPedestal(newItem);
         DestroyItemsOnPedestals();
-        //put items on pedestals
-        //get item ids of what on pedestal
-        //if all of them are req list of things, make shit and put it in on pedestal three
+    }
+
+    void SetObjectToResPedestal(GameObject newItem)
+    {
+        if(resultPedestal==null)
+            PlayerManager.Instance.SetObjectToHands(newItem);
+        else
+        {
+            resultPedestal.SetItemOnPedestal(newItem);
+        }
     }
 
     void DestroyItemsOnPedestals()

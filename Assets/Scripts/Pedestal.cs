@@ -39,14 +39,19 @@ public class Pedestal : MonoBehaviour
             if (CheckIfCorrectItem(objectToPutScript.id))
             {
                 var temp = putItem;
-                putItem = playerManager.objectInHands;
-                putItem.transform.SetParent(center);
-                putItem.transform.localPosition = Vector3.zero;
+                SetItemOnPedestal(playerManager.objectInHands);
                 playerManager.SetObjectToHands(temp);
 
                 OnObjectPut();
             }
         }
+    }
+
+    public void SetItemOnPedestal(GameObject obj)
+    {
+        putItem = obj;
+        putItem.transform.SetParent(center);
+        putItem.transform.localPosition = Vector3.zero;
     }
 
     public void DestroyItemOnPedestal()
